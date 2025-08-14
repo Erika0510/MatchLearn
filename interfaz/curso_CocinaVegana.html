@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curso de Inglés - MatchLearn</title>
+  <style>
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #1b0657;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 100%;
+      padding: 12px 25px;
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      text-align: left;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #1b0657;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1b0657;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-icon {
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 30px;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .course-image {
+      flex: 1;
+      max-width: 300px;
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .course-image img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(13, 212, 40, 0.1);
+    }
+
+    .course-description {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .course-description h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #150b46;
+    }
+
+    .course-description p {
+      font-size: 16px;
+      color: #050505;
+      margin-bottom: 20px;
+    }
+
+    .course-description button {  
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer; 
+    }
+
+    .course-description button:hover {
+      background-color: #05667e;
+    }
+
+    .reviews-section {
+      background-color: #fff;
+      padding: 10px;
+      margin-top: 30px;
+    }
+
+    .reviews-section h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .review {
+      border-top: 1px solid #ccc;
+      padding: 15px 0;
+    }
+
+    .review:first-child {
+      border-top: none;
+    }
+
+    .review p {
+      margin: 5px 0;
+    }
+
+    .review strong {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado con botón de menú -->
+  <header>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+    Curso de Cocina Vegana
+  </header>
+
+  <!-- Sidebar oculto -->
+  <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" onclick="closeSidebar()" style="color:white; font-size: 30px; position: absolute; top: 10px; right: 20px;">&times;</a>
+    <button onclick="location.href='index.html'">Inicio</button>
+    <button onclick="location.href='#'">Mis Cursos</button>
+    <button onclick="location.href='#'">Buscar Cursos</button>
+    <button onclick="location.href='#'">Publicar Curso</button>
+    <button onclick="location.href='#'">Contacto</button>
+    <button onclick="location.href='#'">Cerrar Sesión</button>
+  </div>
+
+  <!-- Contenido principal del curso -->
+  <div class="course-container">
+    <div class="course-description">
+      <h2>Aprende a preparar platos veganos deliciosos y nutritivos</h2>
+      <p>Este curso te enseñará recetas veganas fáciles, técnicas de sustitución de ingredientes y cómo lograr comidas balanceadas sin productos de origen animal.</p>
+      <p>
+        Duración: 6 semanas<br>
+        Nivel: Principiante<br>
+        Modalidad: Online con clases prácticas
+      </p>
+      <button>Inscribirme</button>
+    </div>
+
+    <div class="course-image">
+      <img src="../imagenes/vegana.jpeg" alt="Curso de Cocina Vegana">
+    </div>
+  </div>
+
+  <!-- Reseñas -->
+  <div class="reviews-section">
+    <h3>Reseñas de Estudiantes</h3>
+
+    <div class="review">
+      <p><strong>Lucía Fernández:</strong></p>
+      <p>Me encantó el curso, muy didáctico y fácil de seguir. Las recetas son deliciosas.</p>
+    </div>
+
+    <div class="review">
+      <p><strong>Diego Ramírez:</strong></p>
+      <p>Ideal para quienes quieren comenzar con una alimentación vegana sin complicaciones.</p>
+    </div>
+
+    <div class="review">
+      <p><strong>Carla Gómez:</strong></p>
+      <p>Las clases prácticas fueron geniales. ¡Mi familia ama mis nuevos platos!</p>
+    </div>
+  </div>
+
+  <!-- Script para la barra lateral -->
+  <script>
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+  </script>
+
+</body>
+</html>
