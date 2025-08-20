@@ -321,7 +321,7 @@
       </div>
     </div>
 
-    <div style="display: flex; align-items: flex-start; justify-content: center; gap: 20px;">
+<div style="display: flex; align-items: flex-start; justify-content: center; gap: 20px;">
 
   <!-- Video -->
   <iframe width="560" height="315" 
@@ -334,30 +334,65 @@
 
   <!-- Transcripción -->
   <div style="max-width: 400px;">
+    <!-- Botón ocultar/mostrar -->
     <button id="toggleBtn" style="margin-bottom: 10px; padding: 8px 12px; border: none; background: #007BFF; color: white; border-radius: 6px; cursor: pointer;">
       Ocultar transcripción
     </button>
+
+    <!-- Selector de idioma -->
+    <select id="langSelect" style="margin-bottom: 10px; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
+      <option value="en">Inglés</option>
+      <option value="es">Español</option>
+    </select>
+
+    <!-- Botón descargar -->
     <button id="downloadBtn" style="margin-bottom: 10px; padding: 8px 12px; border: none; background: #28A745; color: white; border-radius: 6px; cursor: pointer;">
       Descargar transcripción
     </button>
+
+    <!-- Área de transcripción -->
     <pre id="transcripcion" style="background: #f9f9f9; border: 1px solid #ddd; padding: 10px; border-radius: 6px; white-space: pre-wrap; overflow: auto; max-height: 315px;">
-00:00:00.110 --> 00:00:06.049
-hey what's up nothing much converting
-
-00:00:03.050 --> 00:00:09.609
-oxygen into carbon dioxide how the hell
-
-00:00:06.049 --> 00:00:09.609
-do you do that breathing
     </pre>
   </div>
 
 </div>
 
 <script>
-  // Toggle transcripción
-  const toggleBtn = document.getElementById('toggleBtn');
   const transcripcion = document.getElementById('transcripcion');
+  const toggleBtn = document.getElementById('toggleBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const langSelect = document.getElementById('langSelect');
+
+  // Transcripciones por idioma
+  const transcripciones = {
+    en: `00:00:00.110 --> 00:00:06.049
+hey what's up nothing much converting
+
+00:00:03.050 --> 00:00:09.609
+oxygen into carbon dioxide how the hell
+
+00:00:06.049 --> 00:00:09.609
+do you do that breathing`,
+    
+    es: `00:00:00.110 --> 00:00:06.049
+hola, ¿qué tal? nada especial convirtiendo
+
+00:00:03.050 --> 00:00:09.609
+oxígeno en dióxido de carbono, ¿cómo demonios
+
+00:00:06.049 --> 00:00:09.609
+lo haces respirando`
+  };
+
+  // Inicializar con idioma seleccionado
+  transcripcion.textContent = transcripciones[langSelect.value];
+
+  // Cambiar idioma
+  langSelect.addEventListener('change', () => {
+    transcripcion.textContent = transcripciones[langSelect.value];
+  });
+
+  // Toggle transcripción
   toggleBtn.addEventListener('click', () => {
     if (transcripcion.style.display === 'none') {
       transcripcion.style.display = 'block';
@@ -369,14 +404,13 @@ do you do that breathing
   });
 
   // Descargar transcripción
-  const downloadBtn = document.getElementById('downloadBtn');
   downloadBtn.addEventListener('click', () => {
     const vttContent = transcripcion.textContent;
     const blob = new Blob([vttContent], { type: 'text/vtt' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Transcripcion.vtt';
+    a.download = `Transcripcion_${langSelect.value}.vtt`;
     a.click();
     URL.revokeObjectURL(url);
   });
