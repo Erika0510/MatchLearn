@@ -93,7 +93,31 @@
   .sidebar button:hover {
     background-color: #777;
   }
+  .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
 
     .header-content {
       padding: 40px 20px;
@@ -171,8 +195,34 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       background-color: #070222;
     }
+    
   </style>
 </head>
+<script>
+function changeFontSize(action) {
+  const body = document.body;
+  const style = window.getComputedStyle(body, null).getPropertyValue('font-size');
+  let currentSize = parseFloat(style);
+
+  if(action === 'increase' && currentSize < 32) { // tamaño máximo 32px
+    body.style.fontSize = (currentSize + 2) + 'px';
+  } else if(action === 'decrease' && currentSize > 12) { // tamaño mínimo 12px
+    body.style.fontSize = (currentSize - 2) + 'px';
+  }
+
+  // Guardar preferencia en localStorage
+  localStorage.setItem('fontSize', body.style.fontSize);
+}
+
+// Aplicar tamaño guardado al cargar la página
+window.onload = function() {
+  const savedSize = localStorage.getItem('fontSize');
+  if(savedSize) {
+    document.body.style.fontSize = savedSize;
+  }
+}
+</script>
+
 <body>
   <style>
     .botonera {
@@ -180,6 +230,7 @@
       flex-direction: column;
       width: 200px;
     }
+    
   </style>
   <div id="sidebar" class="sidebar">
     <button onclick="location.href='#'"><i class="fa-regular fa-house"></i> Inicio</button>
@@ -187,17 +238,26 @@
     <button onclick="location.href='#'"><i class="fa-solid fa-magnifying-glass"></i> Buscar Cursos</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-upload"></i> Publicar Curso</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-question"></i> Ayuda</button>
-  
+    
   </div>
+
   
   <header>
     <div style="display: flex; align-items: center;">
       <span class="menu-toggle" onclick="toggleSidebar()">&#9776;</span>
       <a href="#" class="logo">MatchLearn</a>
     </div>
+    
+  </div>
+
+
+    
     <div class="auth-buttons">
       <a href="iniciar_sesion.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar Sesión</a>
       <a href="registrarse.html"><i class="fa-regular fa-registered"></i> Registrarse</a>
+      <button onclick="changeFontSize('increase')"><i class="fa-solid fa-plus"></i> A</button>
+      <button onclick="changeFontSize('decrease')"><i class="fa-solid fa-minus"></i> A</button>
+      
     </div>
   </header>
 

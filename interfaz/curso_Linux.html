@@ -26,7 +26,7 @@
       color: white;
       border: none;
       text-align: left;
-      font-size: 18px;
+     
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -41,19 +41,70 @@
       margin: 0;
       padding: 0;
     }
+    .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+}
+
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+    
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+  .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+
 
     header {
       background-color: #1b0657;
       color: white;
       padding: 20px;
-      font-size: 24px;
+    
       display: flex;
       align-items: center;
       gap: 15px;
     }
 
     .menu-icon {
-      font-size: 30px;
+     
       cursor: pointer;
     }
 
@@ -89,13 +140,13 @@
     }
 
     .course-description h2 {
-      font-size: 32px;
+     
       margin-bottom: 20px;
       color: #150b46;
     }
 
     .course-description p {
-      font-size: 16px;
+      
       color: #050505;
       margin-bottom: 20px;
     }
@@ -105,7 +156,7 @@
       color: white;
       border: none;
       padding: 10px;
-      font-size: 16px;
+      
       border-radius: 30px;
       cursor: pointer; 
     }
@@ -121,7 +172,7 @@
     }
 
     .reviews-section h3 {
-      font-size: 24px;
+      
       margin-bottom: 20px;
     }
 
@@ -143,10 +194,40 @@
     }
   </style>
 </head>
+<script>
+  function openSidebar() {
+    document.getElementById("sidebar").style.width = "250px";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.width = "0";
+  }
+  
+
+  // --- Control de tamaño de fuente ---
+  let fontSize = 16; 
+  function changeFontSize(action) {
+    if (action === "increase" && fontSize < 30) {
+      fontSize += 2;
+    } else if (action === "decrease" && fontSize > 10) {
+      fontSize -= 2;
+    }
+    document.body.style.fontSize = fontSize + "px";
+    document.querySelectorAll('.content p, .content h2, .content h3, .content button').forEach(el => {
+    el.style.fontSize = fontSize + "px";
+  });
+  }
+ 
+  
+</script>
 <body>
   <header>
     <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
     Curso de Linux
+    <div class="font-size-controls">
+      <button onclick="changeFontSize('increase')"><i class="fa-solid fa-plus"></i> A</button>
+      <button onclick="changeFontSize('decrease')"><i class="fa-solid fa-minus"></i> A</button>
+  </div>
   </header>
 
   <div id="sidebar" class="sidebar">

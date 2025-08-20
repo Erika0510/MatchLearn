@@ -16,7 +16,6 @@
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
-      z-index: 1000;
     }
 
     .sidebar button {
@@ -27,7 +26,7 @@
       color: white;
       border: none;
       text-align: left;
-      font-size: 18px;
+     
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -42,19 +41,70 @@
       margin: 0;
       padding: 0;
     }
+    .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+}
 
-    header {
+    .font-size-controls button {
       background-color: #1b0657;
       color: white;
-      padding: 15px 20px;
-      font-size: 24px;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+    
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+  .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+
+
+    header {
+      background-color: #1b0657;
+      color: white;
+      padding: 20px;
+    
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     .menu-icon {
-      font-size: 30px;
+     
       cursor: pointer;
     }
 
@@ -64,6 +114,24 @@
       padding: 30px;
       gap: 20px;
       justify-content: center;
+      align-items: center;
+    }
+
+    .course-image {
+      flex: 1;
+      max-width: 300px;
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .course-image img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(13, 212, 40, 0.1);
     }
 
     .course-description {
@@ -72,49 +140,39 @@
     }
 
     .course-description h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
+     
+      margin-bottom: 20px;
+      color: #150b46;
     }
 
     .course-description p {
-      font-size: 16px;
-      color: #555;
+      
+      color: #050505;
       margin-bottom: 20px;
     }
 
-    .course-description button {
+    .course-description button {  
       background-color: #1b0657;
       color: white;
       border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 10px;
+      
+      border-radius: 30px;
+      cursor: pointer; 
     }
 
     .course-description button:hover {
-      background-color: #1b0657;
-    }
-
-    .course-image {
-      flex: 1;
-      max-width: 400px;
-    }
-
-    .course-image img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px #1b0657;
+      background-color: #05667e;
     }
 
     .reviews-section {
       background-color: #fff;
-      padding: 30px;
+      padding: 10px;
       margin-top: 30px;
     }
 
     .reviews-section h3 {
-      font-size: 24px;
+      
       margin-bottom: 20px;
     }
 
@@ -132,14 +190,44 @@
     }
 
     .review strong {
-      color: #1b0657;
+      color: #333;
     }
   </style>
 </head>
+<script>
+  function openSidebar() {
+    document.getElementById("sidebar").style.width = "250px";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.width = "0";
+  }
+  
+
+  // --- Control de tamaño de fuente ---
+  let fontSize = 16; 
+  function changeFontSize(action) {
+    if (action === "increase" && fontSize < 30) {
+      fontSize += 2;
+    } else if (action === "decrease" && fontSize > 10) {
+      fontSize -= 2;
+    }
+    document.body.style.fontSize = fontSize + "px";
+    document.querySelectorAll('.content p, .content h2, .content h3, .content button').forEach(el => {
+    el.style.fontSize = fontSize + "px";
+  });
+  }
+ 
+  
+</script>
 <body>
   <header>
     <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
     Curso de Canto
+    <div class="font-size-controls">
+      <button onclick="changeFontSize('increase')"><i class="fa-solid fa-plus"></i> A</button>
+      <button onclick="changeFontSize('decrease')"><i class="fa-solid fa-minus"></i> A</button>
+  </div>
   </header>
 
   <div id="sidebar" class="sidebar">
