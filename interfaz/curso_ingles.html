@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Curso de Inglés - MatchLearn</title>
   <style>
+    .theme-bn {
+      filter: grayscale(100%);
+    }
+
+    .theme-contraste {
+      filter: contrast(200%) brightness(120%);
+    }
+
+    .theme-negativo {
+      filter :invert(100%);
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .theme-buttons button {
+      background: #92B053;
+      color: #232036;
+      border: none;
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .theme-buttons button:active {
+      transform: scale(0.95);
+    }
     /* Sidebar */
     .sidebar {
       height: 100%;
@@ -146,8 +187,21 @@
 <body>
 
   <header>
-    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
-    Curso de Inglés
+    <div><span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+    Curso de Inglés</div>
+
+    <div class="theme-buttons">
+      <button onclick="setTheme('')">Normal</button>
+      <button onclick="setTheme('theme-bn')">B/N</button>
+      <button onclick="setTheme('theme-contraste')">Contraste</button>
+      <button onclick="setTheme('theme-negativo')">Negativo</button>
+    </div>
+
+    <script>
+      function setTheme(theme) {
+        document.body.className = theme;
+      }
+    </script>
   </header>
 
   <div id="sidebar" class="sidebar">
