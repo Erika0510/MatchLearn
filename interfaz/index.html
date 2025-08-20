@@ -1,33 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/d0aaeff5a4.js" crossorigin="anonymous"></script>
   <title>MatchLearn</title>
+
+  <!-- aca esta la wea del estilo o sea css-->
   <style>
+    /* variables de los colores normales*/
+    :root {
+
+      --colorbase: linear-gradient(-45deg, #f8f5f8, #e2e1f0, #f0e8ff, #f8f5f8);
+      --colorbasebar: #1b0657;
+      --colorletrasicon: white;
+      --colorbotoncurso: #05044b;
+      --colorbtnaccesibilidad: #92B053;
+    }
+
+
+
+    /* escala de grises*/
+    .theme-bn {
+      filter: grayscale(100%);
+    }
+
+    /* Alto contraste pa los ciegos */
+    .theme-contraste {
+      filter: contrast(200%) brightness(120%);
+    }
+
+    .theme-negativo {
+      filter: invert(100%);
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 10px;
+
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .theme-buttons button {
+      background: var(--colorbtnaccesibilidad);
+      color: #232036;
+      border: none;
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .theme-buttons button:active {
+      transform: scale(0.95);
+    }
+
+
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #f8f5f8, #e2e1f0, #f0e8ff, #f8f5f8);
+      background: var(--colorbase);
       background-size: 400% 400%;
       animation: gradientBG 12s ease infinite;
     }
 
+    
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
+    
     header {
-      background-color: #1b0657;
-      color: white;
+      background-color: var(--colorbasebar);
+      color: var(--colorletrasicon);
       padding: 15px 30px;
       display: flex;
       align-items: center;
@@ -40,21 +113,24 @@
       margin-right: 20px;
     }
 
+    
     .logo {
      
       font-weight: bold;
       text-decoration: none;
-      color: white;
+      color: var(--colorletrasicon);
     }
 
+    
     .auth-buttons {
       display: flex;
       gap: 10px;
     }
 
+    
     .auth-buttons a {
-      background-color: #ffffff;
-      color: #1b0657;
+      background-color: #ddd;
+      color: var(--colorbasebar);
       text-decoration: none;
       padding: 8px 15px;
       border-radius: 5px;
@@ -62,18 +138,20 @@
       transition: background-color 0.3s, transform 0.3s ease;
     }
 
+    
     .auth-buttons a:hover {
       background-color: #ddd;
       transform: scale(1.1);
     }
 
+    
     .sidebar {
       height: 100%;
       width: 0;
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #1b0657;
+      background-color: var(--colorbasebar);
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
@@ -124,10 +202,12 @@
       text-align: center;
     }
 
+    
     .header-content h1 {
       margin-bottom: 10px;
     }
 
+    
     .header-content p {
     
       color: #555;
@@ -135,15 +215,18 @@
       margin: auto;
     }
 
+   
     .container {
       padding: 20px;
       text-align: center;
     }
 
+    
     .container h2 {
       margin-bottom: 20px;
     }
 
+    
     .card {
       border: 1px solid #ccc;
       border-radius: 10px;
@@ -153,10 +236,11 @@
       display: inline-block;
       vertical-align: top;
       background-color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
+    
     .card:hover {
       transform: translateY(-8px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -169,16 +253,18 @@
       border-radius: 10px;
     }
 
+   
     .card h3 {
       margin: 10px 0 5px;
     }
 
+   
     .card p {
       color: #555;
     }
 
     .btn {
-      background-color: #05044b;
+      background-color: var(--colorbotoncurso);
       color: white;
       padding: 10px;
       border: none;
@@ -188,6 +274,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
+    
     .btn:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -195,6 +282,8 @@
     }
     
   </style>
+
+
 </head>
 <script>
   function openSidebar() {
@@ -230,18 +319,23 @@
       width: 200px;
     }
   </style>
+
+
+
   <div id="sidebar" class="sidebar">
     <button onclick="location.href='#'"><i class="fa-regular fa-house"></i> Inicio</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-book"></i> Mis Cursos</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-magnifying-glass"></i> Buscar Cursos</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-upload"></i> Publicar Curso</button>
     <button onclick="location.href='#'"><i class="fa-solid fa-question"></i> Ayuda</button>
-  
-     <button onclick="location.href='index_nofuncional.html'"><i class="fa-solid fa-arrow-right-to-bracket"></i>  Cerrar sesion</button>
 
-  
+    <button onclick="location.href='index_nofuncional.html'"><i class="fa-solid fa-arrow-right-to-bracket"></i> Cerrar
+      sesion</button>
+
+
   </div>
-  
+
+
   <header>
     <div style="display: flex; align-items: center;">
       <span class="menu-toggle" onclick="toggleSidebar()">&#9776;</span>
@@ -253,10 +347,24 @@
     </div>
   </header>
 
+    <div class="theme-buttons">
+      <button onclick="setTheme('')">Normal</button>
+      <button onclick="setTheme('theme-bn')">B/N</button>
+      <button onclick="setTheme('theme-contraste')">Contraste</button>
+      <button onclick="setTheme('theme-negativo')">Negativo</button>
+    </div>
+
+    <script>
+      function setTheme(theme) {
+        document.body.className = theme;
+      }
+    </script>
+
   <div class="header-content">
     <h1>MatchLearn</h1>
     <p>
-      Conecta personas que desean enseñar o aprender nuevas habilidades. Únete a clases, comparte tu experiencia o descubre tu próxima pasión.
+      Conecta personas que desean enseñar o aprender nuevas habilidades. Únete a clases, comparte tu experiencia o
+      descubre tu próxima pasión.
     </p>
   </div>
 
@@ -269,7 +377,7 @@
       <h3>Curso de Inglés</h3>
       <p>Impartido por: María López</p>
       <p>Aprende inglés desde cero.</p>
-      <a href="curso_ingles.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_ingles.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver perfil</button></a>
     </div>
 
     <div class="card">
@@ -277,7 +385,7 @@
       <h3>Curso de Linux</h3>
       <p>Impartido por: María López</p>
       <p>Aprende Linux desde cero.</p>
-      <a href="curso_Linux.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_Linux.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver perfil</button></a>
     </div>
 
     <div class="card">
@@ -285,7 +393,7 @@
       <h3>Curso de Guitarra</h3>
       <p>Impartido por: Juan Pérez</p>
       <p>Aprende a tocar guitarra desde cero.</p>
-      <a href="curso_guitarra.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_guitarra.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver perfil</button></a>
     </div>
 
     <div class="card">
@@ -293,42 +401,47 @@
       <h3>Curso de Panadería</h3>
       <p>Impartido por: María López</p>
       <p>Recetas ricas y de calidad.</p>
-      <a href="curso_Panaderia.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_Panaderia.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver perfil</button></a>
     </div>
 
-    
+
 
     <div class="card">
       <img src="../imagenes/vegana.jpeg" alt="Plato de comida vegana con vegetales verdes y la palabra Cocina Vegana">
       <h3>Curso de Cocina Vegana</h3>
       <p>Impartido por: María López</p>
       <p>Recetas saludables y sabrosas.</p>
-      <a href="curso_CocinaVegana.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_CocinaVegana.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver
+          perfil</button></a>
     </div>
 
-    
+
 
     <div class="card">
       <img src="../imagenes/canto.png " alt="Micrófono negro con texto que dice Singing Course">
       <h3>Curso de Canto</h3>
       <p>Impartido por: María López</p>
       <p>Aprende a vocalizar correctamente.</p>
-      <a href="curso_Canto.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_Canto.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver perfil</button></a>
     </div>
 
-   
+
     <div class="card">
       <img src="../imagenes/reposteria.jpeg" alt="Cupcake ilustrado con fondo decorativo y texto que dice Repostería Academia">
       <h3>Curso de Repostería</h3>
       <p>Impartido por: María López</p>
       <p>Postres deliciosos y fáciles de preparar.</p>
-      <a href="curso_Reposteria.html"><button class="btn"><i class="fa-solid fa-circle-info"></i>  Ver perfil</button></a>
+      <a href="curso_Reposteria.html"><button class="btn"><i class="fa-solid fa-circle-info"></i> Ver
+          perfil</button></a>
     </div>
 
-   
 
-   
+
+
+
   </div>
+
+
 
   <script>
     function toggleSidebar() {
@@ -336,21 +449,24 @@
       sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
     }
 
-  // Cierra el sidebar si se hace clic fuera de él
-  document.addEventListener("click", function(event) {
-    const sidebar = document.getElementById("sidebar");
-    const menuToggle = document.querySelector(".menu-toggle");
+    // Cierra el sidebar si se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+      const sidebar = document.getElementById("sidebar");
+      const menuToggle = document.querySelector(".menu-toggle");
 
-    if (
-      sidebar.style.width === "250px" &&
-      !sidebar.contains(event.target) &&
-      !menuToggle.contains(event.target)
-    ) {
-      sidebar.style.width = "0";
-    }
-  });
+      if (
+        sidebar.style.width === "250px" &&
+        !sidebar.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        sidebar.style.width = "0";
+      }
+    });
 
   </script>
 
+
+
 </body>
+
 </html>
