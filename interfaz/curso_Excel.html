@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <script src="https://kit.fontawesome.com/d0aaeff5a4.js" crossorigin="anonymous"></script>
+  <title>Curso de Inglés - MatchLearn</title>
+  <style>
+
+    .theme-bn {
+      filter: grayscale(100%);
+    }
+
+    .theme-contraste {
+      filter: contrast(200%) brightness(120%);
+    }
+
+    .theme-negativo {
+      filter :invert(100%);
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .theme-buttons button {
+      background: #92B053;
+      color: #232036;
+      border: none;
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .theme-buttons button:active {
+      transform: scale(0.95);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #1b0657;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 100%;
+      padding: 12px 25px;
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      text-align: left;
+     
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #1b0657;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+}
+
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+    
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+  .font-size-controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .font-size-controls button {
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .font-size-controls button:hover {
+      background-color: #333;
+    }
+
+
+    header {
+      background-color: #1b0657;
+      color: white;
+      padding: 20px;
+    
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .menu-icon {
+     
+      cursor: pointer;
+    }
+
+    .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 30px;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .course-image {
+      flex: 1;
+      max-width: 300px;
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .course-image img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(13, 212, 40, 0.1);
+    }
+
+    .course-description {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .course-description h2 {
+     
+      margin-bottom: 20px;
+      color: #150b46;
+    }
+
+    .course-description p {
+      
+      color: #050505;
+      margin-bottom: 20px;
+    }
+
+    .course-description button {  
+      background-color: #1b0657;
+      color: white;
+      border: none;
+      padding: 10px;
+      
+      border-radius: 30px;
+      cursor: pointer; 
+    }
+
+    .course-description button:hover {
+      background-color: #05667e;
+    }
+
+    .reviews-section {
+      background-color: #fff;
+      padding: 10px;
+      margin-top: 30px;
+    }
+
+    .reviews-section h3 {
+      
+      margin-bottom: 20px;
+    }
+
+    .review {
+      border-top: 1px solid #ccc;
+      padding: 15px 0;
+    }
+
+    .review:first-child {
+      border-top: none;
+    }
+
+    .review p {
+      margin: 5px 0;
+    }
+
+    .review strong {
+      color: #333;
+    }
+  </style>
+</head>
+<script>
+  function openSidebar() {
+    document.getElementById("sidebar").style.width = "250px";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.width = "0";
+  }
+  
+
+  // --- Control de tamaño de fuente ---
+  let fontSize = 16; 
+  function changeFontSize(action) {
+    if (action === "increase" && fontSize < 30) {
+      fontSize += 2;
+    } else if (action === "decrease" && fontSize > 10) {
+      fontSize -= 2;
+    }
+    document.body.style.fontSize = fontSize + "px";
+    document.querySelectorAll('.content p, .content h2, .content h3, .content button').forEach(el => {
+    el.style.fontSize = fontSize + "px";
+  });
+  }
+ 
+  
+</script>
+<body>
+  <header>
+    <div>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+    Curso de Excel
+    <div class="font-size-controls">
+      <button onclick="changeFontSize('increase')"><i class="fa-solid fa-plus"></i> A</button>
+      <button onclick="changeFontSize('decrease')"><i class="fa-solid fa-minus"></i> A</button>
+  </div>
+    
+  </header>
+
+  </div>
+
+    <!-- mi fokin boton de los temas -->
+    <div class="theme-buttons">
+      <button onclick="setTheme('')">Normal</button>
+      <button onclick="setTheme('theme-bn')">B/N</button>
+      <button onclick="setTheme('theme-contraste')">Contraste</button>
+      <button onclick="setTheme('theme-negativo')">Negativo</button>
+    </div>
+
+    <script>
+      function setTheme(theme) {
+        document.body.className = theme;
+      }
+    </script>
+
+  <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" onclick="closeSidebar()" style="color:white; font-size: 30px; position: absolute; top: 10px; right: 20px;">&times;</a>
+        <button onclick="location.href='index.html'"><i class="fa-regular fa-house"></i>Inicio</button>
+    <button onclick="location.href='#'"><i class="fa-solid fa-book"></i> Mis Cursos</button>
+    <button onclick="location.href='#'"><i class="fa-solid fa-magnifying-glass"></i> Buscar Cursos</button>
+    <button onclick="location.href='#'"><i class="fa-solid fa-upload"></i> Publicar Curso</button>
+    <button onclick="location.href='#'"><i class="fa-solid fa-question"></i> Ayuda</button>
+  
+     <button onclick="location.href='index_nofuncional.html'"><i class="fa-solid fa-arrow-right-to-bracket"></i>  Cerrar sesion</button>
+
+  </div>
+  <div class="course-container">
+      <div class="course-description">
+        <h2>Domina Excel desde lo básico hasta funciones avanzadas</h2>
+        <p>Aprende a utilizar fórmulas, gráficos, tablas dinámicas y funciones lógicas. Este curso es ideal para estudiantes, profesionales y emprendedores.</p>
+        <p>
+          Duración: 4 semanas<br>
+          Nivel: Básico a Intermedio<br>
+          Modalidad: Online en vivo
+        </p>
+        <button>Inscribirme</button>
+      </div>
+     
+      <div class="course-image">
+         <img src="../imagenes/excellogo.png" alt="Logo de Excel con texto Curso de Excel - Formacion a tu medida, Certificado por Microsoft Imagine Academy">
+      </div>
+    </div>
+
+    <div class="reviews-section">
+    <h3>Reseñas de Estudiantes</h3>
+
+    <div class="review">
+      <p><strong>Lucía Fernández:</strong></p>
+      <p>Me encantó el curso, muy didáctico y fácil de seguir. El profesor es excelente.</p>
+    </div>
+
+    <div class="review">
+      <p><strong>Diego Ramírez:</strong></p>
+      <p>Excelente curso para empezar. Aprendí lo básico y ahora me siento más seguro conversando.</p>
+    </div>
+
+    <div class="review">
+      <p><strong>Carla Gómez:</strong></p>
+      <p>Las clases en vivo son dinámicas y muy participativas. Recomendado al 100%.</p>
+    </div>
+ 
+  </div>
+
+  <script>
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+  </script>
+</body>
+</html>
