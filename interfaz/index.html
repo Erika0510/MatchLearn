@@ -347,6 +347,19 @@
     </div>
   </header>
 
+    <div class="theme-buttons">
+      <button onclick="setTheme('')">Normal</button>
+      <button onclick="setTheme('theme-bn')">B/N</button>
+      <button onclick="setTheme('theme-contraste')">Contraste</button>
+      <button onclick="setTheme('theme-negativo')">Negativo</button>
+    </div>
+
+    <script>
+      function setTheme(theme) {
+        document.body.className = theme;
+      }
+    </script>
+
   <div class="header-content">
     <h1>MatchLearn</h1>
     <p>
