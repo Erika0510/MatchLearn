@@ -353,4 +353,26 @@
   </script>
 
 </body>
+
+<script>
+  let fontSize = 16;
+
+  function aumentarLetra() {
+    fontSize += 2;
+    document.body.style.fontSize = fontSize + "px";
+  }
+
+  function disminuirLetra() {
+    if (fontSize > 10) {
+      fontSize -= 2;
+      document.body.style.fontSize = fontSize + "px";
+    }
+  }
+
+  function resetLetra() {
+    fontSize = 16;
+    document.body.style.fontSize = fontSize + "px";
+  }
+</script>
+  
 </html>
